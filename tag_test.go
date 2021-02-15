@@ -58,6 +58,13 @@ func Test_parseTag(t *testing.T) {
 				Skip:     false,
 			},
 		},
+		{
+			name: "No tags",
+			args: args{
+				st: reflect.StructTag(``),
+			},
+			want: nil,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
