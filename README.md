@@ -2,7 +2,7 @@
 
 A lightweight context based go dependency injector.
 
-# Example
+## Examples
 
 **Struct injection**
 
@@ -11,10 +11,11 @@ In this example values are injected "by type" in to the targeted struct pointer.
 _example:_
 
 ```go
-package injector
+package main
 
 import (
     "fmt"
+
     "github.com/naueramant/go-injector"
 )
 
@@ -54,6 +55,8 @@ _output:_
 {A:{} B:0x58b470 C:Hello World D:42}
 ```
 
+Test it yourself at the [go playground](https://play.golang.org/p/EnKDlfwPp5A).
+
 **Named injections**
 
 Instead of injection "by type" it is also possible to inject by tag name.
@@ -61,10 +64,11 @@ Instead of injection "by type" it is also possible to inject by tag name.
 _example:_
 
 ```go
-package injector
+package main
 
 import (
     "fmt"
+
     "github.com/naueramant/go-injector"
 )
 
@@ -87,6 +91,7 @@ func main() {
 
     fmt.Printf("%+v\n", foo)
 }
+
 ```
 
 _output:_
@@ -95,4 +100,10 @@ _output:_
 {A:Hello World B:bar}
 ```
 
+Test it yourself at the [go playground](https://play.golang.org/p/vZj6jGufmfQ).
+
 It is important that the provided type and field type match else an error will be returned by inject.
+
+## Documentation
+
+TODO...
