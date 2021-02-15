@@ -138,6 +138,8 @@ func main() {
 {A:42}
 ```
 
+Test it yourself at the [go playground](https://play.golang.org/p/odoAHwMW1Tw).
+
 **Struct tags**
 
 ```go
