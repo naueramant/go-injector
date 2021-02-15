@@ -10,10 +10,9 @@ func Test_parseTag(t *testing.T) {
 		st reflect.StructTag
 	}
 	tests := []struct {
-		name  string
-		args  args
-		want  *Tag
-		want1 bool
+		name string
+		args args
+		want *Tag
 	}{
 		{
 			name: "Skip",
@@ -25,7 +24,6 @@ func Test_parseTag(t *testing.T) {
 				Required: false,
 				Skip:     true,
 			},
-			want1: true,
 		},
 		{
 			name: "Required",
@@ -37,7 +35,6 @@ func Test_parseTag(t *testing.T) {
 				Required: true,
 				Skip:     false,
 			},
-			want1: true,
 		},
 		{
 			name: "Named required",
@@ -49,7 +46,6 @@ func Test_parseTag(t *testing.T) {
 				Required: true,
 				Skip:     false,
 			},
-			want1: true,
 		},
 		{
 			name: "Named",
@@ -61,17 +57,13 @@ func Test_parseTag(t *testing.T) {
 				Required: false,
 				Skip:     false,
 			},
-			want1: true,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := parseTag(tt.args.st)
+			got := parseTag(tt.args.st)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("parseTag() got = %v, want %v", got, tt.want)
-			}
-			if got1 != tt.want1 {
-				t.Errorf("parseTag() got1 = %v, want %v", got1, tt.want1)
 			}
 		})
 	}

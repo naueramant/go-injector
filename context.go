@@ -63,15 +63,15 @@ func (c *Context) Inject(structPtr interface{}) error {
 	for i := 0; i < chasedTargetType.NumField(); i++ {
 		f := chasedTargetType.Field(i)
 
-		tag, ok := parseTag(f.Tag)
-		if tag.Skip {
+		tag := parseTag(f.Tag)
+		if tag != nil && tag.Skip {
 			continue
 		}
 
 		var name string
 		var m map[string]interface{}
 
-		if ok {
+		if tag != nil {
 			m = c.namedProvided
 			name = tag.Name
 		} else {
@@ -81,7 +81,7 @@ func (c *Context) Inject(structPtr interface{}) error {
 
 		d, ok := m[name]
 		if !ok {
-			if tag.Required {
+			if tag != nil && tag.Required {
 				return &ErrRequiredStructField{
 					FieldName:  f.Name,
 					TargetType: targetType,

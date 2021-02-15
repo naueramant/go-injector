@@ -15,17 +15,17 @@ type Tag struct {
 	Skip     bool
 }
 
-func parseTag(st reflect.StructTag) (*Tag, bool) {
+func parseTag(st reflect.StructTag) *Tag {
 	val, ok := st.Lookup("inject")
 	if !ok {
-		return nil, ok
+		return nil
 	}
 
 	val = strings.TrimSpace(val)
 
 	vals := strings.Split(val, ",")
 	if len(vals) == 0 {
-		return nil, false
+		return nil
 	}
 
 	var name string
@@ -37,5 +37,5 @@ func parseTag(st reflect.StructTag) (*Tag, bool) {
 		Name:     name,
 		Required: strings.Contains(val, "required"),
 		Skip:     strings.Contains(val, "-"),
-	}, true
+	}
 }
