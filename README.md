@@ -104,6 +104,15 @@ Test it yourself at the [go playground](https://play.golang.org/p/vZj6jGufmfQ).
 
 It is important that the provided type and field type match else an error will be returned by inject.
 
-## Documentation
+**Struct tags**
 
-TODO...
+```go
+type Foo struct {
+    A string `inject:"foo"`          # named
+    B string `inject:"foo,required"` # named and required
+    C string `inject:"required"`     # required
+    D string `inject:"-"`            # skip
+}
+```
+
+If a field is required and not provided `inject` will return an error.
