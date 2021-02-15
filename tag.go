@@ -35,7 +35,7 @@ func parseTag(st reflect.StructTag) (*Tag, bool) {
 
 	return &Tag{
 		Name:     name,
-		Required: strings.Contains(val, "-"),
+		Required: strings.Contains(val, "required"),
 		Skip:     strings.Contains(val, "-"),
 	}, true
 }
