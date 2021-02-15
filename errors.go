@@ -32,3 +32,16 @@ func (e *ErrFieldValueTypeMismatch) Error() string {
 		e.ValueType.String(),
 	)
 }
+
+type ErrRequiredStructField struct {
+	FieldName  string
+	TargetType reflect.Type
+}
+
+func (e *ErrRequiredStructField) Error() string {
+	return fmt.Sprintf(
+		"Nothing provided for required field '%s' on struct '%s'",
+		e.FieldName,
+		e.TargetType.String(),
+	)
+}

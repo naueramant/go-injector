@@ -4,10 +4,6 @@ import (
 	"reflect"
 )
 
-const (
-	tagName = "inject"
-)
-
 type Context struct {
 	typesProvided map[string]interface{}
 	namedProvided map[string]interface{}
@@ -67,13 +63,17 @@ func (c *Context) Inject(structPtr interface{}) error {
 	for i := 0; i < chasedTargetType.NumField(); i++ {
 		f := chasedTargetType.Field(i)
 
+		tag, ok := parseTag(f.Tag)
+		if tag.Skip {
+			continue
+		}
+
 		var name string
 		var m map[string]interface{}
 
-		tagName, ok := f.Tag.Lookup(tagName)
 		if ok {
 			m = c.namedProvided
-			name = tagName
+			name = tag.Name
 		} else {
 			m = c.typesProvided
 			name = f.Type.String()
@@ -81,6 +81,13 @@ func (c *Context) Inject(structPtr interface{}) error {
 
 		d, ok := m[name]
 		if !ok {
+			if tag.Required {
+				return &ErrRequiredStructField{
+					FieldName:  f.Name,
+					TargetType: targetType,
+				}
+			}
+
 			continue
 		}
 
