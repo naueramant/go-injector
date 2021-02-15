@@ -104,6 +104,40 @@ Test it yourself at the [go playground](https://play.golang.org/p/vZj6jGufmfQ).
 
 It is important that the provided type and field type match else an error will be returned by inject.
 
+**Global context**
+
+A global context is provided for convenience and can be accessed directly on the package as so:
+
+```go
+package main
+
+import (
+    "fmt"
+
+    "github.com/naueramant/go-injector"
+)
+
+type Foo struct {
+    A int
+}
+
+func main() {
+    injector.Provide(42)
+
+    foo := Foo{}
+
+    if err := injector.Inject(&foo); err != nil {
+        panic(err)
+    }
+
+    fmt.Printf("%+v\n", foo)
+}
+```
+
+```sh
+{A:42}
+```
+
 **Struct tags**
 
 ```go
