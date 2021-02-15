@@ -102,7 +102,7 @@ _output:_
 
 Test it yourself at the [go playground](https://play.golang.org/p/vZj6jGufmfQ).
 
-It is important that the provided type and field type match else an error will be returned by inject.
+It is important that the provided value type and field type match else an error will be returned by inject.
 
 **Global context**
 
