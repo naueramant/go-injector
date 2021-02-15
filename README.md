@@ -108,10 +108,10 @@ It is important that the provided type and field type match else an error will b
 
 ```go
 type Foo struct {
-    A string `inject:"foo"`          # named
-    B string `inject:"foo,required"` # named and required
-    C string `inject:"required"`     # required
-    D string `inject:"-"`            # skip
+    A string `inject:"foo"`          // named
+    B string `inject:"foo,required"` // named and required
+    C string `inject:"required"`     // required
+    D string `inject:"-"`            // skip
 }
 ```
 
